@@ -29,7 +29,7 @@ public class C03_HandleWindows extends TestBase {
 
                 //WindowType.TAB-->yeni bir sekme acar
         driver.get("https://www.youtube.com");
-        String youtubuWindowHandle=driver.getWindowHandle();
+        String youtubeWindowHandle=driver.getWindowHandle();
         //Window 3'te(yeni bir pencerede) https://www.linkedin.com sayfasını açınız:
         driver.switchTo().newWindow(WindowType.WINDOW);
         String likedinWindowHandle= driver.getWindowHandle();
@@ -44,7 +44,7 @@ public class C03_HandleWindows extends TestBase {
         bekle(3);
 
         //youtube sayfasına geçiniz:
-        driver.switchTo().window(youtubuWindowHandle);
+        driver.switchTo().window(youtubeWindowHandle);
         bekle(3);
 
         //linkedIn sayfasına geçiniz:
