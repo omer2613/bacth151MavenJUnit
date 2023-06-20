@@ -4,10 +4,14 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -42,6 +46,31 @@ public abstract class TestBase {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+        //Selenium Wait/Expilicit wait
+    public void visibleWait(WebElement element,int saniye){
+        WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(saniye));
+        wait.until(ExpectedConditions.visibilityOf(element));
+
+    }
+    //invisibilityOfElementLocated(locater) methodu
+    public void visibleWait(By locator, int saniye){
+        WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(saniye));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+
+    }
+    //alert Wait
+    public void visibleWait( int saniye){
+        WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(saniye));
+        wait.until(ExpectedConditions.alertIsPresent());//alert cikana kadar bekler
+
+    }
+    //FluentWait visible methodu
+    public void visibleFluentWait(WebElement element,int saniye,int milisaniye){
+        new FluentWait<>(driver).withTimeout(Duration.ofSeconds(saniye)).
+                pollingEvery(Duration.ofMillis(milisaniye)).
+                until(ExpectedConditions.visibilityOf(element));
+
     }
 
     //AcceptAlert
