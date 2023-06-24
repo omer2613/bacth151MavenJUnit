@@ -16,6 +16,11 @@ import java.util.Date;
 public class C04_WEresmi extends TestBase {
     @Test
     public void test01() throws IOException {
+        /*
+        Bir webelementin resmini almak için önce Webelementi locate edip bir webelemente assing ederiz.
+       ve bu webelementi direk getScreenShotAs() methodunu kullanarak resmini belirttimiz dosyaya kaydederiz.
+ */
+
         //amazon sayfasına gidelim
         driver.get("https://amazon.com");
 
