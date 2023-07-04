@@ -44,7 +44,7 @@ public abstract class TestBase {
     public void tearDown() throws Exception {
         extentReports=new ExtentReports();
         extentReports.flush();
-        driver.quit();
+       // driver.quit();
     }
     //HARD WAIT (Bekleme Methodu)
     public void bekle(int saniye) {
@@ -175,5 +175,14 @@ public abstract class TestBase {
         extentHtmlReporter.config().setDocumentTitle("Extent Report");
         extentHtmlReporter.config().setReportName(reportName);
 
+    }
+    // Click Methodu
+    public void click(WebElement element){
+        try {
+            element.click();
+        } catch (Exception e) {
+            JavascriptExecutor js=(JavascriptExecutor) driver;
+            js.executeScript("arguments[0].click();",element);
+        }
     }
 }

@@ -71,7 +71,7 @@ kayarız.
         //Kullanılan satır sayısın bulun
         System.out.println(workbook.getSheet("Sheet1").getPhysicalNumberOfRows());
         //NOT:getPhysicalNumberOfRows() methodu kullanilan yani ici dolu olan satirlarin sayisini verir ve index 1 den baslar.
-        //sAYFADİ SATİR SAYİSİNİ BELİRTİN
+        //SAYFADİ SATİR SAYİSİNİ BELİRTİN
         System.out.println("Sayfadaki Satir Sayisi : "+workbook.getSheet("Sheet1").getLastRowNum());
         //NOT:getLastRowNum() methodu sayfadaki satır sayısını verir ve index 0(sıfır) dan başlar
 
