@@ -33,6 +33,7 @@ public abstract class TestBase {
     Bu class'a extends yaptığımız test class'larından ulaşabiliriz
      */
     protected WebDriver driver;
+
     @Before
     public void setUp() throws Exception {
         WebDriverManager.chromedriver().setup();
@@ -40,12 +41,14 @@ public abstract class TestBase {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
     }
+
     @After
     public void tearDown() throws Exception {
-        extentReports=new ExtentReports();
+        extentReports = new ExtentReports();
         extentReports.flush();
-       // driver.quit();
+        // driver.quit();
     }
+
     //HARD WAIT (Bekleme Methodu)
     public void bekle(int saniye) {
         try {
@@ -54,68 +57,82 @@ public abstract class TestBase {
             throw new RuntimeException(e);
         }
     }
+
     //Selenium Wait/Explicit Wait
     //visibilityOf(element) methodu
     public void visibleWait(WebElement element, int saniye) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(saniye));
         wait.until(ExpectedConditions.visibilityOf(element));
     }
+
     //visibilityOfElementLocated(locator) methodu
     public void visibleWait(By locator, int saniye) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(saniye));
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
+
     //AlertWait methodu
     public void alertWait(int saniye) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(saniye));
         wait.until(ExpectedConditions.alertIsPresent());
     }
+
     //FluentWait visible Methodu
     public void visibleFluentWait(WebElement element, int saniye, int milisaniye) {
         new FluentWait<>(driver).withTimeout(Duration.ofSeconds(saniye)).
                 pollingEvery(Duration.ofMillis(milisaniye)).
                 until(ExpectedConditions.visibilityOf(element));
     }
+
     //AcceptAlert
     public void acceptAlert() {
         driver.switchTo().alert().accept();
     }
+
     //DismissAlert
     public void dismissAlert() {
         driver.switchTo().alert().dismiss();
     }
+
     //getTextAlert
     public String getTextAlert() {
         return driver.switchTo().alert().getText();
     }
+
     //sendKeysAlert
     public void sendKeysAlert(String text) {
         driver.switchTo().alert().sendKeys(text);
     }
+
     //DropDown VisibleText
     public void selectVisibleText(WebElement ddm, String text) {
         Select select = new Select(ddm);
         select.selectByVisibleText(text);
     }
+
     //DropDown Index
     public void selectIndex(WebElement ddm, int index) {
         Select select = new Select(ddm);
         select.selectByIndex(index);
     }
+
     //DropDown Value
     public void selectValue(WebElement ddm, String value) {
         Select select = new Select(ddm);
         select.selectByValue(value);
     }
+
     //SwitchTo Window-1
     public void switchToWindow(int index) {
         List<String> pencereler = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(pencereler.get(index));
     }
+
     //SwitchTo Window-2
     public void switchWindow(int index) {
         driver.switchTo().window(driver.getWindowHandles().toArray()[index].toString());
     }
+
     //Tüm Sayfa Resmi (ScreenShot)
     public void tumSayfaResmi() {
         String tarih = new SimpleDateFormat("_hh_mm_ss_ddMMyyyy").format(new Date());
@@ -127,6 +144,7 @@ public abstract class TestBase {
             throw new RuntimeException(e);
         }
     }
+
     //WebElement Resmi (Webelement ScreenShot)
     public void webElementResmi(WebElement element) {
         String tarih = new SimpleDateFormat("_hh_mm_ss_ddMMyyyy").format(new Date());
@@ -137,6 +155,7 @@ public abstract class TestBase {
             throw new RuntimeException(e);
         }
     }
+
     //UploadFile Robot Class
     public void uploadFilePath(String filePath) {
         try {
@@ -160,29 +179,62 @@ public abstract class TestBase {
             throw new RuntimeException(e);
         }
     }
+
     //Extent Report Methodu
-    public void extentReport(String browser,String reportName){
+    public void extentReport(String browser, String reportName) {
         extentReports = new ExtentReports();
         String tarih = new SimpleDateFormat("_hh_mm_ss_ddMMyyyy").format(new Date());
-        String dosyaYolu = "testOutput/extentReports/extentReport"+tarih+".html";
+        String dosyaYolu = "testOutput/extentReports/extentReport" + tarih + ".html";
         extentHtmlReporter = new ExtentHtmlReporter(dosyaYolu);
         extentReports.attachReporter(extentHtmlReporter);//-->HTML formatında raporlamayı başlatacak
 
         //Raporda gözükmesini isteğimiz bilgiler için
 
-        extentReports.setSystemInfo("Browser",browser);
-        extentReports.setSystemInfo("Tester","Omer");
+        extentReports.setSystemInfo("Browser", browser);
+        extentReports.setSystemInfo("Tester", "Omer");
         extentHtmlReporter.config().setDocumentTitle("Extent Report");
         extentHtmlReporter.config().setReportName(reportName);
 
     }
+
     // Click Methodu
-    public void click(WebElement element){
+    public void click(WebElement element) {
         try {
             element.click();
         } catch (Exception e) {
-            JavascriptExecutor js=(JavascriptExecutor) driver;
-            js.executeScript("arguments[0].click();",element);
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("arguments[0].click();", element);
         }
     }
+
+    //JS Scroll WE Method
+    public void jsScrollWE(WebElement element) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true);", element);
+
+    }
+
+    //JS Scroll END Method(Sayfanın altına)
+    public void scrollEnd() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollTo(0,document.body.scrollHeight)");
+    }
+
+    //JS Scroll HOME Method(Sayfanın üstüne)
+    public void scrollHome() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollTo(0,-document.body.scrollHeight)");
+    }
+
+    //JS SendKeys() method
+    public void jsSendKeys(String text,WebElement element){
+        JavascriptExecutor js= (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].value='"+text+"'",element);
+    }
+    //JS setAttribute() Method
+    public void jsSetAttribute(String attribute,String text,WebElement element){
+        JavascriptExecutor js= (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].setAttribute('"+attribute+"','"+text+"')",element);
+    }
+
 }

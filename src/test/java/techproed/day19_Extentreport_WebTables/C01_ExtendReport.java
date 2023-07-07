@@ -17,6 +17,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class C01_ExtendReport extends TestBase {
+    /*
+    EXTENTREPORT;
+       1- ExtentReport(aventstack) kullanabilmek için öncelikle mvn adresinden 4.0.9 versiyon numaralı
+    dependency'i pom.xml dosyamıza ekleriz.
+       2- ExtentReports class'ından class seviyeninde obje oluştururuz
+       3- ExtentHtmlReporter class'ından class seviyeninde obje oluştururuz
+       4- ExtentTest class'ından class seviyeninde obje oluştururuz
+     */
     ExtentReports extentReports; //-->Raporlamayı başlatmak için kullanılan obje
     ExtentHtmlReporter extentHtmlReporter;//-->Raporu HTML formatında düzenler
     ExtentTest extentTest;//--> Test adınlarına eklemek istediğimiz bilgileri bu class ile oluştururuz

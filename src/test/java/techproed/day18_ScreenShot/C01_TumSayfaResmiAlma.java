@@ -36,7 +36,7 @@ public class C01_TumSayfaResmiAlma extends TestBase {
         -Üçüncü olarak FileUtils class'ından copyFile() methodu ile ts objemizi kullanarak getScreenShotAs methodu ile
         dosya yolunu belirteceğiz
          */
-        String dosyaYolu = "src/test/java/techproed/TumSayfaResmi/screenShot2.png";
+        String dosyaYolu = "src/test/java/techproed/TumSayfaResmi/screenShot2.png";//src/test/java/techproed/TumSayfaResmi/sonrasini biz yaziyoruz
         TakesScreenshot ts = (TakesScreenshot) driver;
         FileUtils.copyFile(ts.getScreenshotAs(OutputType.FILE),new File(dosyaYolu));
 

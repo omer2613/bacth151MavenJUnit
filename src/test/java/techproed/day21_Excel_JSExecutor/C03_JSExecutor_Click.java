@@ -39,7 +39,7 @@ public class C03_JSExecutor_Click extends TestBase {
     }
 
     @Test
-    public void test02() {
+    public void test02() {//hatali
         //Amazon sayfasına gidiniz
         driver.get("https://amazon.com");
 
